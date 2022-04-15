@@ -26,32 +26,42 @@ app.get('/join', (req, res) => {
 	res.sendFile(__dirname + '/static/join.html');
 });
 app.post('/', (req, res) => {
-try{
-	var id = req.body.id;
-	var name = req.body.name;
-	var usrID = req.body.usrID;
-	fs.appendFile(`./static/chats/${id}.txt`, "", (err) => {
-		if (err) throw err;
-	});
-	res.status(200);
-	res.setHeader('Content-Type', 'application/json');
-	res.end(JSON.stringify({
-		x: id,
-		y: name,
-		z: usrID
-	}))
-	
-}catch(e){
-	console.log((e))
-}
+	try{
+		const path = `./static/chats/${id}.txt`
+		var id = req.body.id;
+		var name = req.body.name;
+		var usrID = req.body.usrID;
+		fs.open(path,'r',function(err, fd){
+			if (err) {
+				fs.writeFile(path, '', function(err) {
+					if(err) {
+						console.log(err);
+					}
+				});
+			} else {
+			}
+		});	
+		res.status(200);
+		res.setHeader('Content-Type', 'application/json');
+		res.end(JSON.stringify({
+			x: id,
+			y: name,
+			z: usrID
+		}))
+
+	}catch(e){
+		console.log((e))
+	}
 
 });
 
 app.post('/getOldMessages',(req,res)=>{
 	try{
 		const id = req.body.id;
-		fs.readFile(`./static/chats/${id}.txt`, function(err, data) {
-			if(err) throw err;
+		fs.open(`./static/chats/${id}.txt`,'r', function(err, data) {
+			if(err){
+				data=""
+			}
 			var array = data.toString().split("\n");
 			res.status(200);
 			res.setHeader('Content-Type', 'application/json');

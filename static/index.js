@@ -71,10 +71,11 @@ fetch('/', {
 
 window.onload=function(){
 
-var queryDict = {}
-location.search.substr(1).split("&").forEach(function(item) {queryDict[item.split("=")[0]] = item.split("=")[1]})
-var id =queryDict['chatid'];
-document.getElementById("chatid").value = id;
-document.getElementById("chatid").setAttribute('disabled', true);
-
+	var queryDict = {}
+	location.search.substr(1).split("&").forEach(function(item) {queryDict[item.split("=")[0]] = item.split("=")[1]})
+	var id =queryDict['chatid'];
+	if(id){
+		document.getElementById("chatid").value = id;
+		document.getElementById("chatid").setAttribute('disabled', true);
+	}
 }
