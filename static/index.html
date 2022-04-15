@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" >
+	<head>
+		<meta charset="UTF-8">
+		<title>ChatNow : Free Online Chat</title>
+		<link rel="stylesheet" href="static/style.css">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<script src="https://kit.fontawesome.com/a076d05399.js"></script>
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+	</head>
+	<body>
+		<div class="content">
+
+			<div class="text">ChatNow</div>
+			<form action="#" onsubmit="return false;">
+				<div class="field">
+					<span class="fas fa-user"></span>
+					<input autocomplete="off" placeholder="Enter your Name" name ="user" id="username" type ="text"  required>
+					<!--          <label>Name</label>-->
+				</div>
+				<div class="field">
+					<span class="fas fa-lock"></span>
+					<input  value="auto-generated" readonly="true">
+				</div>
+				<button onclick ="create()" type="button" >Create</button>
+				<button onclick ="location.href='/join'" type="button">Join</button>
+				<div class="signup">How to use?
+					<a href="/help">Need Help</a>
+				</div>
+
+			</form>
+		</div>
+
+		<script src="static/index.js"></script>
+
+	</body>
+</html>
