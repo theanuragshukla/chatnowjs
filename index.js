@@ -26,7 +26,7 @@ app.get('/join', (req, res) => {
 	res.sendFile(__dirname + '/static/join.html');
 });
 app.post('/', (req, res) => {
-
+try{
 	var id = req.body.id;
 	var name = req.body.name;
 	var usrID = req.body.usrID;
@@ -39,7 +39,12 @@ app.post('/', (req, res) => {
 		x: id,
 		y: name,
 		z: usrID
-	}));
+	}))
+	
+}catch(e){
+	console.log((e))
+}
+
 });
 
 app.post('/getOldMessages',(req,res)=>{
