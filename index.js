@@ -27,20 +27,19 @@ app.get('/join', (req, res) => {
 });
 app.post('/', (req, res) => {
 	try{
-		const path = `./static/chats/${id}.txt`
 		var id = req.body.id;
 		var name = req.body.name;
 		var usrID = req.body.usrID;
-		fs.open(path,'r',function(err, fd){
+		
+		const path = `./static/chats/${id}.txt`
+	fs.open(path,'r',function(err, fd){
 			if (err) {
 				fs.writeFile(path, '', function(err) {
 					if(err) {
 						console.log(err);
 					}
 				});
-			} else {
-			}
-		});	
+			}});	
 		res.status(200);
 		res.setHeader('Content-Type', 'application/json');
 		res.end(JSON.stringify({
@@ -55,24 +54,24 @@ app.post('/', (req, res) => {
 
 });
 
-app.post('/getOldMessages',(req,res)=>{
+app.post('/getOldMessages',async (req,res)=>{
 	try{
 		const id = req.body.id;
-		fs.open(`./static/chats/${id}.txt`,'r', function(err, data) {
-			if(err){
-				data=""
-			}
+		fs.readFile(`./static/chats/${id}.txt`, function(err, data) {
+			if(err) throw err;
 			var array = data.toString().split("\n");
 			res.status(200);
 			res.setHeader('Content-Type', 'application/json');
 			res.end(JSON.stringify({data:array}));
 		})
 	}catch(err){
+		console.log(err)
 		res.status(400);
 		res.setHeader('Content-Type', 'application/json');
 		res.end(JSON.stringify({data:[]}));
 	}
-})
+
+	})
 
 app.get('/chat', (req, res) => {
 	res.sendFile(__dirname + '/static/chat.html');

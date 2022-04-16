@@ -13,6 +13,7 @@ window.onload = function() {
 	socket=io.connect('/',{ query: `roomId=${id}` });
 	socket.on("newMsg",(msg)=>{
 		setmsgs(msg)
+		console.log(msg)
 	})
 	document.getElementById("shareframe").src = "/share?id="+id;
 }
@@ -128,8 +129,7 @@ function getDate() {
 
 function generateId() {
 	var pass = '';
-	var str = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ' +
-		'abcdefghijklmnopqrstuvwxyz0123456789';
+	var str = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
 	for (i = 1; i <= 10; i++) {
 		var char = Math.floor(Math.random()
 				* str.length + 1);
