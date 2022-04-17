@@ -3,12 +3,16 @@ const msgerInput = get(".msger-input");
 const msgerChat = get(".msger-chat");
 const id = sessionStorage.getItem("chatid");
 const uID = sessionStorage.getItem("usrID");
+const PERSON_NAME = sessionStorage.getItem("name");
 const BOT_IMG = "https://image.flaticon.com/icons/svg/327/327779.svg";
 const PERSON_IMG = "https://image.flaticon.com/icons/svg/145/145867.svg";
-const PERSON_NAME = sessionStorage.getItem("name");
 const user = PERSON_NAME;
 var socket;
-window.onload = function() {
+window.onload =async  function() {
+	if(id==null || !id || id==''){
+		location='/'
+		return;
+	}
 	getOldMessages()
 	socket=io.connect('/',{ query: `roomId=${id}` });
 	socket.on("newMsg",(msg)=>{
@@ -18,7 +22,12 @@ window.onload = function() {
 	document.getElementById("shareframe").src = "/share?id="+id;
 }
 
-const getOldMessages = () =>{
+const getOldMessages =async () =>{
+	if(id==null || !id || id==''){
+		location='/'
+		return
+	}
+	
 fetch('/getOldMessages', {
   method: 'POST',
   headers: {
