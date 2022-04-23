@@ -8,6 +8,9 @@ const BOT_IMG = "https://image.flaticon.com/icons/svg/327/327779.svg";
 const PERSON_IMG = "https://image.flaticon.com/icons/svg/145/145867.svg";
 const user = PERSON_NAME;
 var socket;
+if(id==null || !id || id==''){
+		location='/'
+}	
 window.onload =async  function() {
 	if(id==null || !id || id==''){
 		location='/'
